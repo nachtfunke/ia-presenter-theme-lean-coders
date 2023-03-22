@@ -1,9 +1,16 @@
-// Container
-.title-container {
-  background-color: var(--color-primary);
-}
+@layer title {
+  // Container
+  .title-container {
+  }
 
-// Slide Content
-.layout-title {
+  // Slide Content
+  .layout-title {
+    h2 {
+      font-size: 1.75em !important;
+    }
 
+    :where(h3, h4, h5, h6) {
+      color: var(--color-dark-cold-600) !important;
+    }
+  }
 }

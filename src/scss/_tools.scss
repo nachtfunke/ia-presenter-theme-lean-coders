@@ -1,0 +1,10 @@
+@function presentSlideBackground() {
+  @return unquote('.present[data-background-image]');
+}
+
+@mixin hasBackgroundSelector($_layout) {
+  .slides:has(section.#{$_layout}-container#{presentSlideBackground()}) {
+    @debug &;
+    @content;
+  }
+}

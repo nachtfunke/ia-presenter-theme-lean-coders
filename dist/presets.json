@@ -1,7 +1,9 @@
 {
-  "Presets": {
-    "Name": "Lean Coders Default",
-    "TitleFont": "Montserrat",
-    "BodyFont": "Varta"
-  }
+  "Presets": [
+    {
+      "Name": "Lean Coders Default",
+      "TitleFont": "Montserrat",
+      "BodyFont": "Varta"
+    }
+  ]
 }

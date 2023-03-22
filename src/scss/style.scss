@@ -1,4 +1,8 @@
-@use 'generic';
-@use 'base';
-@use 'fonts';
-@use 'layouts';
+@layer lean-coders-theme {
+  @import 'generic';
+  @import 'base';
+  @import 'fonts';
+  @layer layouts {
+    @import 'layouts';
+  }
+}

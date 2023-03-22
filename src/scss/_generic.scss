@@ -1,8 +1,58 @@
+$_weights: (
+  100: 95%,
+  200: 90%,
+  300: 87%,
+  400: 74%,
+  500: 61%,
+  600: 48%,
+  700: 35%,
+  800: 22%,
+  900: 9%
+);
+
+$_colors: (
+  "silver": (
+    "hue": 255,
+    "saturation": 7%,
+    "function": "dark-cold"
+  ),
+  "nickel": (
+    "hue": 285,
+    "saturation": 8%,
+    "function": "dark-warm"
+  ),
+  "plum": (
+    "hue": 320,
+    "saturation": 52%,
+    "function": "secondary"
+  ),
+  "rose": (
+    "hue": 320,
+    "saturation": 85%,
+    "function": "primary"
+  ),
+);
+
 :root {
-  --color-primary: tomato;
-  --code-background: rgba(0,0,0,0.45);
+  @each $colorName, $colorMap in $_colors {
+    $name: map-get($colorMap, "function");
+    // weights
+    @each $weightName, $weightValue in $_weights {
+      $hsValue: map-get($colorMap, "hue") map-get($colorMap, "saturation");
+      $colorPropName: --color-#{$name};
+      $colorPropWeightedName: #{$colorPropName}-#{$weightName};
+      #{$colorPropName}-hs: #{$hsValue};
+      #{$colorPropWeightedName}: hsl(var(#{$colorPropName}-hs) $weightValue);
+    }
+  }
+  --color-primary: var(--color-primary-700);
+  --color-secondary: var(--color-secondary-700);
+  --color-dark: var(--color-dark-cold-700);
+  --color-bright: var(--color-dark-warm-200);
+  // IA Presenter Theme used color props
+  --code-background: hsl(0 0% 0% / .03);
   --code-border: rgba(0,0,0,0.7);
-  --code-text: #F7F7F7;
+  --code-text: #676767;
   --code-comment: #80878D;
   --code-type: #EF98A8;
   --code-include: #C596C9;
@@ -24,4 +74,5 @@
   --dark-code-variables: #77B5E3;
   --dark-code-functions: #DF8DC0;
   --dark-code-literal: #F6B99A;
+  color: var(--color-dark-cold-800);
 }

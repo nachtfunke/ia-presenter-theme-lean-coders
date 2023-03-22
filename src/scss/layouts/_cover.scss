@@ -1,9 +1,64 @@
-// Container
-.cover-container {
+@use '../tools' as *;
 
-}
+@layer cover {
+  // Container
+  .cover-container {
+  }
 
-// Slide Content
-.layout-cover {
+  // Slide Content
+  .layout-cover {
+    :is(h1) {
+      font-weight: 650 !important;
+    }
 
+    :is(h2, h3, h4, h5, h6) {
+      font-weight: 500 !important;
+    }
+
+    h1 {
+      position: relative;
+
+      &::before {
+        content: '';
+        display: block;
+        aspect-ratio: 300 / 132;
+        background-image: url('logo.svg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 2.5em;
+        margin-block-end: .5em;
+      }
+    }
+  }
+
+  // style the background differently, but only for the cover layout. So this selector is needed.
+  @include hasBackgroundSelector('cover') {
+    & > section.cover-container#{presentSlideBackground()} {
+      width: 70% !important;
+    }
+
+    :where(.header, .footer) {
+      display: none !important;
+    }
+
+    & + .backgrounds > .slide-background.has-background-image {
+      &::before {
+        content: '';
+        position: absolute;
+        inset-block-start: 0;
+        inset-inline-end: 0;
+        width: 30%;
+        height: 100%;
+        background-color: var(--color-secondary-800);
+        mix-blend-mode: multiply;
+        z-index: 1;
+      }
+
+      & > .slide-background-content {
+        width: 30% !important;
+        inset-inline-end: 0;
+        filter: grayscale(1);
+      }
+    }
+  }
 }
